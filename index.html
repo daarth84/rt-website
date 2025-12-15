@@ -20,282 +20,295 @@
         * {
             font-family: 'Roboto', sans-serif;
         }
+
+        /* Page zoom for optimal reading on larger screens */
+        .page-zoom {
+            transform: scale(0.94);
+            transform-origin: top center;
+        }
+
+        /* Keep layout at normal scale on small screens so touch / readability isn't harmed */
+        @media (max-width: 768px) {
+            .page-zoom { transform: none; }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-white text-slate-900">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div id="brand" class="font-black text-2xl tracking-tight cursor-pointer">
-                Aarthii <span class="text-blue-600">Deenadayalan</span>
+    <div class="page-zoom">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+                <div id="brand" class="font-black text-2xl tracking-tight cursor-pointer">
+                    Aarthii <span class="text-blue-600">Deenadayalan</span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <button data-tab="home" class="tab-btn text-sm font-medium transition text-blue-600 border-b-2 border-blue-600 pb-2">Start Here</button>
+                    <!-- Deep Dive tab removed -->
+                    <button data-tab="strengths" class="tab-btn text-sm font-medium transition text-slate-600 hover:text-blue-600">My Strengths</button>
+                    <button data-tab="content" class="tab-btn text-sm font-medium transition text-slate-600 hover:text-blue-600">Content I Read</button>
+                    <button data-tab="insights" class="tab-btn text-sm font-medium transition text-slate-600 hover:text-blue-600">What's on My Mind</button>
+                </div>
+
+                <button id="menuToggle" class="md:hidden p-2" aria-label="Toggle menu">
+                    <i data-lucide="menu"></i>
+                </button>
             </div>
 
-            <div class="hidden md:flex items-center gap-8">
-                <button data-tab="home" class="tab-btn text-sm font-medium transition text-blue-600 border-b-2 border-blue-600 pb-2">Start Here</button>
-                <button data-tab="projects" class="tab-btn text-sm font-medium transition text-slate-600 hover:text-blue-600">Deep Dive</button>
-                <button data-tab="strengths" class="tab-btn text-sm font-medium transition text-slate-600 hover:text-blue-600">My Strengths</button>
-                <button data-tab="content" class="tab-btn text-sm font-medium transition text-slate-600 hover:text-blue-600">Content I Read</button>
-                <button data-tab="insights" class="tab-btn text-sm font-medium transition text-slate-600 hover:text-blue-600">What's on My Mind</button>
+            <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-200 px-6 py-4">
+                <button data-tab="home" class="mobile-tab-btn block w-full text-left py-3 text-slate-600 hover:text-blue-600 transition">Start Here</button>
+                <!-- Deep Dive (projects) removed from mobile menu -->
+                <button data-tab="strengths" class="mobile-tab-btn block w-full text-left py-3 text-slate-600 hover:text-blue-600 transition">My Strengths</button>
+                <button data-tab="content" class="mobile-tab-btn block w-full text-left py-3 text-slate-600 hover:text-blue-600 transition">Content I Read</button>
+                <button data-tab="insights" class="mobile-tab-btn block w-full text-left py-3 text-slate-600 hover:text-blue-600 transition">What's on My Mind</button>
             </div>
+        </nav>
 
-            <button id="menuToggle" class="md:hidden p-2" aria-label="Toggle menu">
-                <i data-lucide="menu"></i>
-            </button>
-        </div>
-
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-200 px-6 py-4">
-            <button data-tab="home" class="mobile-tab-btn block w-full text-left py-3 text-slate-600 hover:text-blue-600 transition">Start Here</button>
-           // <button data-tab="projects" class="mobile-tab-btn block w-full text-left py-3 text-slate-600 hover:text-blue-600 transition">Deep Dive</button>
-            <button data-tab="strengths" class="mobile-tab-btn block w-full text-left py-3 text-slate-600 hover:text-blue-600 transition">My Strengths</button>
-            <button data-tab="content" class="mobile-tab-btn block w-full text-left py-3 text-slate-600 hover:text-blue-600 transition">Content I Read</button>
-            <button data-tab="insights" class="mobile-tab-btn block w-full text-left py-3 text-slate-600 hover:text-blue-600 transition">What's on My Mind</button>
-        </div>
-    </nav>
-
-    <!-- HOME TAB -->
-    <main class="pt-40" id="tabs-root">
-        <section data-panel="home" class="tab-panel block">
-            <section class="pb-32 px-6 overflow-hidden">
-                <div class="max-w-7xl mx-auto">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                        <div>
-                            <div class="mb-8">
-                                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-blue-50 rounded-full border border-blue-200">
-                                    <i data-lucide="zap" class="text-blue-600 w-4 h-4"></i>
-                                    <p class="text-blue-600 text-sm font-medium">New opportunities</p>
+        <!-- HOME TAB -->
+        <main class="pt-40" id="tabs-root">
+            <section data-panel="home" class="tab-panel block">
+                <section class="pb-32 px-6 overflow-hidden">
+                    <div class="max-w-7xl mx-auto">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                            <div>
+                                <div class="mb-8">
+                                    <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-blue-50 rounded-full border border-blue-200">
+                                        <i data-lucide="zap" class="text-blue-600 w-4 h-4"></i>
+                                        <p class="text-blue-600 text-sm font-medium">New opportunities</p>
+                                    </div>
+                                    <h1 class="text-6xl lg:text-7xl font-black leading-tight mb-8 tracking-tight">
+                                        Engineering Impact Today.Leading Technology Transformation Tomorrow. I've delivered <span class="text-blue-600">$4M+ on time, every time.</span>
+                                    </h1>
                                 </div>
-                                <h1 class="text-6xl lg:text-7xl font-black leading-tight mb-8 tracking-tight">
-                                    Engineering Impact Today.Leading Technology Transformation Tomorrow. I've delivered <span class="text-blue-600">$4M+ on time, every time.</span>
-                                </h1>
+
+                                <div class="space-y-4 mb-10">
+                                    <div class="flex gap-4 items-start">
+                                        <i data-lucide="check-circle-2" class="text-blue-600 w-6 h-6 mt-1 flex-shrink-0"></i>
+                                        <p class="text-lg text-slate-700 font-light">15+ years transforming complex enterprise programs into measurable outcomes</p>
+                                    </div>
+                                    <div class="flex gap-4 items-start">
+                                        <i data-lucide="check-circle-2" class="text-blue-600 w-6 h-6 mt-1 flex-shrink-0"></i>
+                                        <p class="text-lg text-slate-700 font-light">Led teams of 200+ and managed programs that increased profitability by $7.5M annually</p>
+                                    </div>
+                                    <div class="flex gap-4 items-start">
+                                        <i data-lucide="check-circle-2" class="text-blue-600 w-6 h-6 mt-1 flex-shrink-0"></i>
+                                        <p class="text-lg text-slate-700 font-light">Expert in SAFe, Agile, and large-scale digital transformations across Fortune 500 companies</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-4 mb-12">
+                                    <a href="#contact" class="group px-8 py-4 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition inline-flex items-center gap-2">
+                                        Let's Talk <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+                                    </a>
+                                    <a href="#" class="px-8 py-4 border-2 border-slate-900 text-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition inline-block">
+                                        Resume
+                                    </a>
+                                </div>
+
+                                <div class="flex flex-col gap-3 text-sm">
+                                    <a href="tel:1234567890" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 transition font-medium">
+                                        <i data-lucide="phone" class="w-4 h-4"></i> (123) 456-7890
+                                    </a>
+                                    <a href="mailto:aarthiideenadayalan@gmail.com" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 transition font-medium">
+                                        <i data-lucide="mail" class="w-4 h-4"></i> aarthiideenadayalan@gmail.com
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/aarthii-deenadayalan-transformingbusinesses" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 transition font-medium">
+                                        <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn Profile
+                                    </a>
+                                </div>
                             </div>
 
-                            <div class="space-y-4 mb-10">
-                                <div class="flex gap-4 items-start">
-                                    <i data-lucide="check-circle-2" class="text-blue-600 w-6 h-6 mt-1 flex-shrink-0"></i>
-                                    <p class="text-lg text-slate-700 font-light">15+ years transforming complex enterprise programs into measurable outcomes</p>
-                                </div>
-                                <div class="flex gap-4 items-start">
-                                    <i data-lucide="check-circle-2" class="text-blue-600 w-6 h-6 mt-1 flex-shrink-0"></i>
-                                    <p class="text-lg text-slate-700 font-light">Led teams of 200+ and managed programs that increased profitability by $7.5M annually</p>
-                                </div>
-                                <div class="flex gap-4 items-start">
-                                    <i data-lucide="check-circle-2" class="text-blue-600 w-6 h-6 mt-1 flex-shrink-0"></i>
-                                    <p class="text-lg text-slate-700 font-light">Expert in SAFe, Agile, and large-scale digital transformations across Fortune 500 companies</p>
-                                </div>
-                            </div>
+                            <!-- Profile photo: smaller, centered, aesthetic outline -->
+                            <div class="relative h-[480px] flex items-center justify-center">
+                                <div class="absolute inset-0 bg-gradient-to-br from-blue-100 via-slate-50 to-blue-50 rounded-3xl transform -rotate-3"></div>
 
-                            <div class="flex flex-wrap gap-4 mb-12">
-                                <a href="#contact" class="group px-8 py-4 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition inline-flex items-center gap-2">
-                                    Let's Talk <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
-                                </a>
-                                <a href="#" class="px-8 py-4 border-2 border-slate-900 text-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition inline-block">
-                                    Resume
-                                </a>
-                            </div>
+                                <!-- Reduced outline size: responsive widths with a fixed inner height for consistent crop -->
+                                <div class="relative w-11/12 sm:w-3/4 md:w-2/3 lg:w-3/4 max-w-[420px] h-[420px] rounded-2xl overflow-hidden border-2 border-slate-200 flex items-center justify-center bg-gradient-to-br from-slate-100 to-blue-50">
+                                    <img src="im4.jpeg" alt="Profile photo" class="block w-full h-full object-cover object-center" />
+                                </div>
 
-                            <div class="flex flex-col gap-3 text-sm">
-                                <a href="tel:1234567890" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 transition font-medium">
-                                    <i data-lucide="phone" class="w-4 h-4"></i> (123) 456-7890
-                                </a>
-                                <a href="mailto:aarthiideenadayalan@gmail.com" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 transition font-medium">
-                                    <i data-lucide="mail" class="w-4 h-4"></i> aarthiideenadayalan@gmail.com
-                                </a>
-                                <a href="https://www.linkedin.com/in/aarthii-deenadayalan-transformingbusinesses" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-slate-600 hover:text-blue-600 transition font-medium">
-                                    <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn Profile
-                                </a>
+                                <div class="absolute -bottom-8 -right-8 w-24 h-24 bg-blue-600 rounded-full opacity-10"></div>
+                                <div class="absolute -top-8 -left-8 w-16 h-16 bg-slate-300 rounded-full opacity-20"></div>
                             </div>
                         </div>
+                    </div>
+                </section>
 
-                        <div class="relative h-[600px] flex items-center justify-center">
-                            <div class="absolute inset-0 bg-gradient-to-br from-blue-100 via-slate-50 to-blue-50 rounded-3xl transform -rotate-3"></div>
-                            <div class="relative w-full h-full rounded-3xl overflow-hidden border-2 border-slate-200 flex items-center justify-center bg-gradient-to-br from-slate-100 to-blue-50">
-                                <!-- Image expanded to fill the rounded outline -->
-                                <img src="im4.jpeg" alt="Profile photo" class="block w-full h-full object-cover" />
-                            </div>
-                            <div class="absolute -bottom-8 -right-8 w-32 h-32 bg-blue-600 rounded-full opacity-10"></div>
-                            <div class="absolute -top-8 -left-8 w-24 h-24 bg-slate-300 rounded-full opacity-20"></div>
+                <section class="py-20 px-6 bg-gradient-to-r from-slate-900 to-slate-800 text-white">
+                    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-12">
+                        <div class="flex flex-col items-center text-center">
+                            <i data-lucide="target" class="text-blue-400 w-8 h-8 mb-4"></i>
+                            <p class="text-5xl font-black mb-2">50+</p>
+                            <p class="text-slate-300 font-medium">Programs Delivered</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <i data-lucide="users" class="text-blue-400 w-8 h-8 mb-4"></i>
+                            <p class="text-5xl font-black mb-2">200+</p>
+                            <p class="text-slate-300 font-medium">Team Members Led</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <i data-lucide="trending-up" class="text-blue-400 w-8 h-8 mb-4"></i>
+                            <p class="text-5xl font-black mb-2">$4M+</p>
+                            <p class="text-slate-300 font-medium">Budget Managed</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <i data-lucide="zap" class="text-blue-400 w-8 h-8 mb-4"></i>
+                            <p class="text-5xl font-black mb-2">15+</p>
+                            <p class="text-slate-300 font-medium">Years Experience</p>
                         </div>
                     </div>
-                </div>
+                </section>
+
+                <section class="py-24 px-6">
+                    <div class="max-w-7xl mx-auto">
+                        <div class="mb-16">
+                            <span class="text-blue-600 font-semibold text-sm uppercase tracking-widest">What I Bring to the Table</span>
+                            <h2 class="text-5xl font-black mt-2">Core Competencies</h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition group">
+                                <h3 class="text-2xl font-bold mb-6 group-hover:text-blue-600 transition">Program & Product</h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Product Lifecycle Management</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Strategic Planning</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Product Roadmaps</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">IT Governance</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Business Process Improvement</span></li>
+                                </ul>
+                            </div>
+                            <div class="p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition group">
+                                <h3 class="text-2xl font-bold mb-6 group-hover:text-blue-600 transition">Leadership & Delivery</h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Cross-functional Teams</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">SAFe/Agile Coaching</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Vendor Management</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Risk Management</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Stakeholder Alignment</span></li>
+                                </ul>
+                            </div>
+                            <div class="p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition group">
+                                <h3 class="text-2xl font-bold mb-6 group-hover:text-blue-600 transition">Business Impact</h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Budget Management</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">KPI & Metrics</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Market Research</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Problem Solving</span></li>
+                                    <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Operations Excellence</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contact" class="py-32 px-6 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -mr-48 -mt-48"></div>
+                    <div class="max-w-4xl mx-auto relative z-10">
+                        <div class="text-center">
+                            <h2 class="text-6xl lg:text-7xl font-black mb-6 leading-tight">
+                                Let's build something transformational
+                            </h2>
+                            <p class="text-xl text-slate-300 mb-12 font-light max-w-2xl mx-auto">
+                                Ready to discuss your next strategic initiative? I'm available for conversations about program leadership, digital transformation, and strategic delivery.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+                                <a href="tel:1234567890" class="group px-10 py-5 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition text-lg inline-flex items-center justify-center gap-2">
+                                    <i data-lucide="phone" class="w-5 h-5"></i> Call (123) 456-7890
+                                </a>
+                                <a href="mailto:aarthiideenadayalan@gmail.com" class="group px-10 py-5 border-2 border-white text-white rounded-full font-bold hover:bg-white hover:text-slate-900 transition text-lg inline-flex items-center justify-center gap-2">
+                                    <i data-lucide="mail" class="w-5 h-5"></i> Email Me
+                                </a>
+                            </div>
+                            <div class="flex justify-center gap-8">
+                                <a href="https://www.linkedin.com/in/aarthii-deenadayalan-transformingbusinesses" target="_blank" rel="noopener noreferrer" class="text-4xl hover:scale-110 transition" title="LinkedIn">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </section>
 
-            <section class="py-20 px-6 bg-gradient-to-r from-slate-900 to-slate-800 text-white">
-                <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-12">
-                    <div class="flex flex-col items-center text-center">
-                        <i data-lucide="target" class="text-blue-400 w-8 h-8 mb-4"></i>
-                        <p class="text-5xl font-black mb-2">50+</p>
-                        <p class="text-slate-300 font-medium">Programs Delivered</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center">
-                        <i data-lucide="users" class="text-blue-400 w-8 h-8 mb-4"></i>
-                        <p class="text-5xl font-black mb-2">200+</p>
-                        <p class="text-slate-300 font-medium">Team Members Led</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center">
-                        <i data-lucide="trending-up" class="text-blue-400 w-8 h-8 mb-4"></i>
-                        <p class="text-5xl font-black mb-2">$4M+</p>
-                        <p class="text-slate-300 font-medium">Budget Managed</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center">
-                        <i data-lucide="zap" class="text-blue-400 w-8 h-8 mb-4"></i>
-                        <p class="text-5xl font-black mb-2">15+</p>
-                        <p class="text-slate-300 font-medium">Years Experience</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-24 px-6">
-                <div class="max-w-7xl mx-auto">
+            <!-- PROJECTS TAB left in DOM but not reachable via navigation since tab removed -->
+            <section data-panel="projects" class="tab-panel hidden pt-40 pb-24 px-6">
+                <div class="max-w-6xl mx-auto">
                     <div class="mb-16">
-                        <span class="text-blue-600 font-semibold text-sm uppercase tracking-widest">What I Bring to the Table</span>
-                        <h2 class="text-5xl font-black mt-2">Core Competencies</h2>
+                        <span class="text-blue-600 font-semibold text-sm uppercase tracking-widest">Strategic Initiatives</span>
+                        <h2 class="text-5xl font-black mt-2">Deep Dive into My Projects</h2>
+                        <p class="text-xl text-slate-600 mt-4 font-light">Detailed explorations of major programs and their impact</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition group">
-                            <h3 class="text-2xl font-bold mb-6 group-hover:text-blue-600 transition">Program & Product</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Product Lifecycle Management</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Strategic Planning</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Product Roadmaps</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">IT Governance</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Business Process Improvement</span></li>
-                            </ul>
-                        </div>
-                        <div class="p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition group">
-                            <h3 class="text-2xl font-bold mb-6 group-hover:text-blue-600 transition">Leadership & Delivery</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Cross-functional Teams</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">SAFe/Agile Coaching</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Vendor Management</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Risk Management</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Stakeholder Alignment</span></li>
-                            </ul>
-                        </div>
-                        <div class="p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition group">
-                            <h3 class="text-2xl font-bold mb-6 group-hover:text-blue-600 transition">Business Impact</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Budget Management</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">KPI & Metrics</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Market Research</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Problem Solving</span></li>
-                                <li class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-blue-600 mt-2 flex-shrink-0"></div><span class="text-slate-700 font-medium">Operations Excellence</span></li>
-                            </ul>
-                        </div>
+                    <div class="space-y-6" id="projects-accordion">
+                        <!-- Project items injected by JS for toggle behavior and to keep markup concise -->
                     </div>
                 </div>
             </section>
 
-            <section id="contact" class="py-32 px-6 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -mr-48 -mt-48"></div>
-                <div class="max-w-4xl mx-auto relative z-10">
-                    <div class="text-center">
-                        <h2 class="text-6xl lg:text-7xl font-black mb-6 leading-tight">
-                            Let's build something transformational
-                        </h2>
-                        <p class="text-xl text-slate-300 mb-12 font-light max-w-2xl mx-auto">
-                            Ready to discuss your next strategic initiative? I'm available for conversations about program leadership, digital transformation, and strategic delivery.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-                            <a href="tel:1234567890" class="group px-10 py-5 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition text-lg inline-flex items-center justify-center gap-2">
-                                <i data-lucide="phone" class="w-5 h-5"></i> Call (123) 456-7890
-                            </a>
-                            <a href="mailto:aarthiideenadayalan@gmail.com" class="group px-10 py-5 border-2 border-white text-white rounded-full font-bold hover:bg-white hover:text-slate-900 transition text-lg inline-flex items-center justify-center gap-2">
-                                <i data-lucide="mail" class="w-5 h-5"></i> Email Me
-                            </a>
+            <!-- STRENGTHS TAB -->
+            <section data-panel="strengths" class="tab-panel hidden pt-40 pb-24 px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="mb-16">
+                        <span class="text-blue-600 font-semibold text-sm uppercase tracking-widest">CliftonStrengths Assessment</span>
+                        <h2 class="text-5xl font-black mt-2">My Top 10 Strengths</h2>
+                        <p class="text-xl text-slate-600 mt-4 font-light">Understanding my talent DNA and how I make things happen</p>
+                    </div>
+
+                    <div class="mb-12 p-8 bg-blue-50 border-2 border-blue-200 rounded-2xl">
+                        <div class="flex items-center gap-4 mb-4">
+                            <i data-lucide="lightbulb" class="text-blue-600 w-7 h-7"></i>
+                            <h3 class="text-2xl font-bold">My Leadership Profile</h3>
                         </div>
-                        <div class="flex justify-center gap-8">
-                            <a href="https://www.linkedin.com/in/aarthii-deenadayalan-transformingbusinesses" target="_blank" rel="noopener noreferrer" class="text-4xl hover:scale-110 transition" title="LinkedIn">💼</a>
-                        </div>
+                        <p class="text-slate-700 font-medium mb-4">I lead with <span class="text-blue-600 font-bold">Executing themes</span>, which means I know how to "catch" an idea and make it a reality.</p>
+                        <p class="text-slate-600">My strongest CliftonStrengths are distributed across Executing, Strategic Thinking, Influencing, and Relationship Building domains, giving me a well-rounded capability to deliver complex programs successfully.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="strengths-grid"></div>
+
+                    <div class="mt-16 p-8 bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-4">How These Strengths Drive Results</h3>
+                        <p class="mb-4 font-light">My unique combination of strengths creates a powerful profile for program leadership:</p>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3"><span class="text-blue-400 font-bold">▸</span><span>Executing foundation ensures delivery: Deliberative planning + Responsibility + Achiever = Programs that ship</span></li>
+                            <li class="flex gap-3"><span class="text-blue-400 font-bold">▸</span><span>Strategic thinking drives smart decisions: Learner insights + Strategic patterns + Futuristic vision = Innovation</span></li>
+                            <li class="flex gap-3"><span class="text-blue-400 font-bold">▸</span><span>Influence creates momentum: Command presence + Relator trust + Communication = Aligned stakeholders</span></li>
+                            <li class="flex gap-3"><span class="text-blue-400 font-bold">▸</span><span>Problem-solving capability: Restorative + Analytical + Strategic = Rapid course correction</span></li>
+                        </ul>
                     </div>
                 </div>
             </section>
-        </section>
 
-        <!-- PROJECTS TAB -->
-        <section data-panel="projects" class="tab-panel hidden pt-40 pb-24 px-6">
-            <div class="max-w-6xl mx-auto">
-                <div class="mb-16">
-                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-widest">Strategic Initiatives</span>
-                    <h2 class="text-5xl font-black mt-2">Deep Dive into My Projects</h2>
-                    <p class="text-xl text-slate-600 mt-4 font-light">Detailed explorations of major programs and their impact</p>
-                </div>
-
-                <div class="space-y-6" id="projects-accordion">
-                    <!-- Project items injected by JS for toggle behavior and to keep markup concise -->
-                </div>
-            </div>
-        </section>
-
-        <!-- STRENGTHS TAB -->
-        <section data-panel="strengths" class="tab-panel hidden pt-40 pb-24 px-6">
-            <div class="max-w-6xl mx-auto">
-                <div class="mb-16">
-                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-widest">CliftonStrengths Assessment</span>
-                    <h2 class="text-5xl font-black mt-2">My Top 10 Strengths</h2>
-                    <p class="text-xl text-slate-600 mt-4 font-light">Understanding my talent DNA and how I make things happen</p>
-                </div>
-
-                <div class="mb-12 p-8 bg-blue-50 border-2 border-blue-200 rounded-2xl">
-                    <div class="flex items-center gap-4 mb-4">
-                        <i data-lucide="lightbulb" class="text-blue-600 w-7 h-7"></i>
-                        <h3 class="text-2xl font-bold">My Leadership Profile</h3>
+            <!-- CONTENT & INSIGHTS tabs unchanged -->
+            <section data-panel="content" class="tab-panel hidden pt-40 pb-24 px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="mb-16">
+                        <span class="text-blue-600 font-semibold text-sm uppercase tracking-widest">Recommended Reading</span>
+                        <h2 class="text-5xl font-black mt-2">Content I Read & Recommend</h2>
+                        <p class="text-xl text-slate-600 mt-4 font-light">Books, articles, and resources that shape my thinking</p>
                     </div>
-                    <p class="text-slate-700 font-medium mb-4">I lead with <span class="text-blue-600 font-bold">Executing themes</span>, which means I know how to "catch" an idea and make it a reality.</p>
-                    <p class="text-slate-600">My strongest CliftonStrengths are distributed across Executing, Strategic Thinking, Influencing, and Relationship Building domains, giving me a well-rounded capability to deliver complex programs successfully.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="content-grid"></div>
                 </div>
+            </section>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="strengths-grid"></div>
-
-                <div class="mt-16 p-8 bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl">
-                    <h3 class="text-2xl font-bold mb-4">How These Strengths Drive Results</h3>
-                    <p class="mb-4 font-light">My unique combination of strengths creates a powerful profile for program leadership:</p>
-                    <ul class="space-y-3">
-                        <li class="flex gap-3"><span class="text-blue-400 font-bold">▸</span><span>Executing foundation ensures delivery: Deliberative planning + Responsibility + Achiever = Programs that ship</span></li>
-                        <li class="flex gap-3"><span class="text-blue-400 font-bold">▸</span><span>Strategic thinking drives smart decisions: Learner insights + Strategic patterns + Futuristic vision = Innovation</span></li>
-                        <li class="flex gap-3"><span class="text-blue-400 font-bold">▸</span><span>Influence creates momentum: Command presence + Relator trust + Communication = Aligned stakeholders</span></li>
-                        <li class="flex gap-3"><span class="text-blue-400 font-bold">▸</span><span>Problem-solving capability: Restorative + Analytical + Strategic = Rapid course correction</span></li>
-                    </ul>
+            <section data-panel="insights" class="tab-panel hidden pt-40 pb-24 px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="mb-16">
+                        <span class="text-blue-600 font-semibold text-sm uppercase tracking-widest">Current Thinking</span>
+                        <h2 class="text-5xl font-black mt-2">What's On My Mind Lately</h2>
+                        <p class="text-xl text-slate-600 mt-4 font-light">My perspectives on program management, technology, and transformation</p>
+                    </div>
+                    <div class="space-y-8" id="insights-list"></div>
                 </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-12 px-6 bg-white border-t border-slate-200 text-center text-slate-600">
+            <p class="font-medium mb-4">© 2025 Aarthii Deenadayalan. All rights reserved.</p>
+            <div class="flex justify-center gap-6">
+                <a href="https://www.linkedin.com/in/aarthii-deenadayalan-transformingbusinesses" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-blue-600 transition font-medium text-sm">LinkedIn</a>
+                <a href="mailto:aarthiideenadayalan@gmail.com" class="text-slate-600 hover:text-blue-600 transition font-medium text-sm">Email</a>
+                <a href="tel:1234567890" class="text-slate-600 hover:text-blue-600 transition font-medium text-sm">Contact</a>
             </div>
-        </section>
-
-        <!-- CONTENT TAB -->
-        <section data-panel="content" class="tab-panel hidden pt-40 pb-24 px-6">
-            <div class="max-w-6xl mx-auto">
-                <div class="mb-16">
-                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-widest">Recommended Reading</span>
-                    <h2 class="text-5xl font-black mt-2">Content I Read & Recommend</h2>
-                    <p class="text-xl text-slate-600 mt-4 font-light">Books, articles, and resources that shape my thinking</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="content-grid"></div>
-            </div>
-        </section>
-
-        <!-- INSIGHTS TAB -->
-        <section data-panel="insights" class="tab-panel hidden pt-40 pb-24 px-6">
-            <div class="max-w-6xl mx-auto">
-                <div class="mb-16">
-                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-widest">Current Thinking</span>
-                    <h2 class="text-5xl font-black mt-2">What's On My Mind Lately</h2>
-                    <p class="text-xl text-slate-600 mt-4 font-light">My perspectives on program management, technology, and transformation</p>
-                </div>
-                <div class="space-y-8" id="insights-list"></div>
-            </div>
-        </section>
-
-        
-    </main>
-
-    <!-- Footer -->
-    <footer class="py-12 px-6 bg-white border-t border-slate-200 text-center text-slate-600">
-        <p class="font-medium mb-4">© 2025 Aarthii Deenadayalan. All rights reserved.</p>
-        <div class="flex justify-center gap-6">
-            <a href="https://www.linkedin.com/in/aarthii-deenadayalan-transformingbusinesses" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-blue-600 transition font-medium text-sm">LinkedIn</a>
-            <a href="mailto:aarthiideenadayalan@gmail.com" class="text-slate-600 hover:text-blue-600 transition font-medium text-sm">Email</a>
-            <a href="tel:1234567890" class="text-slate-600 hover:text-blue-600 transition font-medium text-sm">Contact</a>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <!-- Scripts: Lucide for icons + app logic -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -420,31 +433,31 @@
             const wrapper = document.createElement('div');
             wrapper.className = 'cursor-pointer';
             wrapper.innerHTML = `
-            <div class="p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition">
-              <div class="flex items-start justify-between">
-                <div>
-                  <div class="flex items-center gap-4 mb-4">
-                    <span class="text-5xl">${project.icon}</span>
+                <div class="p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition">
+                  <div class="flex items-start justify-between">
                     <div>
-                      <h3 class="text-2xl font-bold">${project.title}</h3>
-                      <p class="text-blue-600 font-semibold">${project.summary}</p>
+                      <div class="flex items-center gap-4 mb-4">
+                        <span class="text-5xl">${project.icon}</span>
+                        <div>
+                          <h3 class="text-2xl font-bold">${project.title}</h3>
+                          <p class="text-blue-600 font-semibold">${project.summary}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <i class="arrow w-6 h-6 text-blue-600 transition" data-lucide="arrow-right"></i>
+                  </div>
+                  <div class="details hidden mt-6 pt-6 border-t border-slate-200">
+                    <div class="mb-6">
+                      <h4 class="font-bold text-slate-900 mb-4">Key Achievements:</h4>
+                      <ul class="space-y-3">
+                        ${project.details.map(d => `<li class=\"flex gap-3 text-slate-700\"><span class=\"text-blue-600 font-bold\">▸</span><span class=\"font-medium\">${d}</span></li>`).join('')}
+                      </ul>
+                    </div>
+                    <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                      <p class="text-sm font-semibold text-blue-900">Business Impact: <span class="font-bold">${project.impact}</span></p>
                     </div>
                   </div>
-                </div>
-                <i class="arrow w-6 h-6 text-blue-600 transition" data-lucide="arrow-right"></i>
-              </div>
-              <div class="details hidden mt-6 pt-6 border-t border-slate-200">
-                <div class="mb-6">
-                  <h4 class="font-bold text-slate-900 mb-4">Key Achievements:</h4>
-                  <ul class="space-y-3">
-                    ${project.details.map(d => `<li class=\"flex gap-3 text-slate-700\"><span class=\"text-blue-600 font-bold\">▸</span><span class=\"font-medium\">${d}</span></li>`).join('')}
-                  </ul>
-                </div>
-                <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                  <p class="text-sm font-semibold text-blue-900">Business Impact: <span class="font-bold">${project.impact}</span></p>
-                </div>
-              </div>
-            </div>`;
+                </div>`;
             const card = wrapper.firstElementChild;
             card.addEventListener('click', () => {
                 const details = card.querySelector('.details');
@@ -462,16 +475,16 @@
             const el = document.createElement('div');
             el.className = 'p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition';
             el.innerHTML = `
-            <div class="flex items-start justify-between mb-4">
-              <div>
-                <p class="text-blue-600 font-semibold text-sm uppercase tracking-widest mb-1">#${s.rank} - ${s.category}</p>
-                <h3 class="text-2xl font-bold">${s.name}</h3>
-              </div>
-            </div>
-            <p class="text-slate-700 mb-4">${s.description}</p>
-            <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
-              <p class="text-sm text-blue-900"><span class="font-bold">Application:</span> ${s.applicationText}</p>
-            </div>`;
+                <div class="flex items-start justify-between mb-4">
+                  <div>
+                    <p class="text-blue-600 font-semibold text-sm uppercase tracking-widest mb-1">#${s.rank} - ${s.category}</p>
+                    <h3 class="text-2xl font-bold">${s.name}</h3>
+                  </div>
+                </div>
+                <p class="text-slate-700 mb-4">${s.description}</p>
+                <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <p class="text-sm text-blue-900"><span class="font-bold">Application:</span> ${s.applicationText}</p>
+                </div>`;
             strengthsRoot.appendChild(el);
         });
 
@@ -481,15 +494,15 @@
             const el = document.createElement('div');
             el.className = 'p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition';
             el.innerHTML = `
-            <div class="flex items-start gap-4 mb-4">
-              <span class="text-4xl">${c.icon}</span>
-              <div class="flex-1">
-                <p class="text-blue-600 font-semibold text-sm uppercase tracking-widest mb-1">${c.category}</p>
-                <h3 class="text-xl font-bold mb-1">${c.title}</h3>
-                <p class="text-slate-600 text-sm">by ${c.author}</p>
-              </div>
-            </div>
-            <p class="text-slate-700">${c.why}</p>`;
+                <div class="flex items-start gap-4 mb-4">
+                  <span class="text-4xl">${c.icon}</span>
+                  <div class="flex-1">
+                    <p class="text-blue-600 font-semibold text-sm uppercase tracking-widest mb-1">${c.category}</p>
+                    <h3 class="text-xl font-bold mb-1">${c.title}</h3>
+                    <p class="text-slate-600 text-sm">by ${c.author}</p>
+                  </div>
+                </div>
+                <p class="text-slate-700">${c.why}</p>`;
             contentRoot.appendChild(el);
         });
 
@@ -507,11 +520,11 @@
             const el = document.createElement('div');
             el.className = 'p-8 bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-2xl hover:border-blue-600 hover:shadow-xl transition';
             el.innerHTML = `
-            <div class="mb-4">
-              <p class="text-blue-600 font-semibold text-sm uppercase tracking-widest mb-2">${i.date}</p>
-              <h3 class="text-2xl font-bold">${i.title}</h3>
-            </div>
-            <p class="text-slate-700 leading-relaxed">${i.content}</p>`;
+                <div class="mb-4">
+                  <p class="text-blue-600 font-semibold text-sm uppercase tracking-widest mb-2">${i.date}</p>
+                  <h3 class="text-2xl font-bold">${i.title}</h3>
+                </div>
+                <p class="text-slate-700 leading-relaxed">${i.content}</p>`;
             insightsRoot.appendChild(el);
         });
 
